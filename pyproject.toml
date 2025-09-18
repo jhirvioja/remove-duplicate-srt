@@ -1,0 +1,9 @@
+[project]
+name = "remove-duplicate-srt"
+version = "0.1.0"
+description = "Removes duplicate lines in a .srt file and keeps the enumeration and timestamps correct."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "typer>=0.17.4",
+]
