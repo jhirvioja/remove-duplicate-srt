@@ -28,28 +28,21 @@ def main(
 
     cleaned_subtitles = []
     duplicate_count = 0
+    last_text = None
 
-    i = 0
-    while i < len(subtitle_blocks):
-        current_block = subtitle_blocks[i]
-
-        parts = current_block.split("\n", 2)
+    for block in subtitle_blocks:
+        parts = block.split("\n", 2)
         if len(parts) < 3:
-            i += 1
             continue
 
         current_text = parts[2].strip()
 
-        if i + 1 < len(subtitle_blocks):
-            next_block = subtitle_blocks[i + 1]
-            next_parts = next_block.split("\n", 2)
-            if len(next_parts) >= 3 and next_parts[2].strip() == current_text:
-                duplicate_count += 1
-                i += 2
-                continue
+        if current_text == last_text:
+            duplicate_count += 1
+            continue
 
-        cleaned_subtitles.append(current_block)
-        i += 1
+        cleaned_subtitles.append(block)
+        last_text = current_text
 
     re_numbered_subtitles = []
     for j, block in enumerate(cleaned_subtitles):
